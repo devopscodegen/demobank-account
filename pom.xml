@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.demobank</groupId>
 	<artifactId>account</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<name>account</name>
 	<description>Account Application Component of Demo Bank</description>
 	<url/>
