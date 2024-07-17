@@ -1,4 +1,4 @@
-package com.demobank.account.domain.model;
+package com.demobank.account.domain.model.account;
 
 public class Transaction {
     private String accountId;
@@ -12,13 +12,13 @@ public class Transaction {
     public Transaction(String accountId, Double amount, String currency, TransactionStatus transactionStatus, String transactionId, double newBalance, String newBalanceCurrency) {
         super();
 
-        setAccountId(accountId);
-        setAmount(amount);
-        setCurrency(currency);
-        setStatus(transactionStatus);
-        setTransactionId(transactionId);
-        setNewBalance(newBalance);
-        setNewBalanceCurrency(newBalanceCurrency);
+        this.setAccountId(accountId);
+        this.setAmount(amount);
+        this.setCurrency(currency);
+        this.setStatus(transactionStatus);
+        this.setTransactionId(transactionId);
+        this.setNewBalance(newBalance);
+        this.setNewBalanceCurrency(newBalanceCurrency);
     }
 
     public Transaction() {

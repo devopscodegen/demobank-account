@@ -1,4 +1,4 @@
-package com.demobank.account.port.adapter.controller;
+package com.demobank.account.port.adapter.controller.account;
 
 public class TransactionResponse {
     private String status;
@@ -9,10 +9,10 @@ public class TransactionResponse {
     public TransactionResponse() {}
 
     public TransactionResponse(String status, String transactionId, double newBalance, String newBalanceCurrency) {
-        setStatus(status);
-        setTransactionId(transactionId);
-        setNewBalance(newBalance);
-        setNewBalanceCurrency(newBalanceCurrency);
+        this.setStatus(status);
+        this.setTransactionId(transactionId);
+        this.setNewBalance(newBalance);
+        this.setNewBalanceCurrency(newBalanceCurrency);
     }
 
     public String getStatus() {

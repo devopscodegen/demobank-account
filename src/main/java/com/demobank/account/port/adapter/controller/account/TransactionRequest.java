@@ -1,4 +1,4 @@
-package com.demobank.account.port.adapter.controller;
+package com.demobank.account.port.adapter.controller.account;
 
 public class TransactionRequest {
     private Double amount;
@@ -7,8 +7,8 @@ public class TransactionRequest {
     public TransactionRequest(Double amount, String currency) {
         super();
 
-        setAmount(amount);
-        setCurrency(currency);
+        this.setAmount(amount);
+        this.setCurrency(currency);
     }
 
     public TransactionRequest() {

@@ -1,4 +1,4 @@
-package com.demobank.account.application;
+package com.demobank.account.application.account;
 
 public class WithdrawCommand {
 
@@ -9,9 +9,9 @@ public class WithdrawCommand {
     public WithdrawCommand(String accountId, Double amount, String currency) {
         super();
 
-        setAccountId(accountId);
-        setAmount(amount);
-        setCurrency(currency);
+        this.setAccountId(accountId);
+        this.setAmount(amount);
+        this.setCurrency(currency);
     }
 
     public WithdrawCommand() {
