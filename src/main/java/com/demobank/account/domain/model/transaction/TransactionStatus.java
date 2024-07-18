@@ -1,4 +1,4 @@
-package com.demobank.account.domain.model.account;
+package com.demobank.account.domain.model.transaction;
 
 public enum TransactionStatus {
 

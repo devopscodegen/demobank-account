@@ -7,16 +7,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demobank.account.application.account.AccountApplicationService;
-import com.demobank.account.application.account.DepositCommand;
-import com.demobank.account.application.account.WithdrawCommand;
-import com.demobank.account.domain.model.account.Transaction;
+import com.demobank.account.application.transaction.DepositCommand;
+import com.demobank.account.application.transaction.TransactionApplicationService;
+import com.demobank.account.application.transaction.WithdrawCommand;
+import com.demobank.account.domain.model.transaction.Transaction;
+import com.demobank.account.port.adapter.controller.transaction.TransactionRequest;
+import com.demobank.account.port.adapter.controller.transaction.TransactionResponse;
 
 @RestController
 @RequestMapping("/api/v1/account")
 public class AccountController {
     @Autowired
-    private AccountApplicationService accountApplicationService;
+    private TransactionApplicationService accountApplicationService;
 
     @PostMapping("/{accountId}/withdraw")
     public TransactionResponse withdraw(@PathVariable String accountId, @RequestBody TransactionRequest request) {

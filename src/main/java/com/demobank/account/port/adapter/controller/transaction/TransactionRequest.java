@@ -1,29 +1,18 @@
-package com.demobank.account.application.account;
+package com.demobank.account.port.adapter.controller.transaction;
 
-public class DepositCommand {
-
-    private String accountId;
+public class TransactionRequest {
     private Double amount;
     private String currency;
 
-    public DepositCommand(String accountId, Double amount, String currency) {
+    public TransactionRequest(Double amount, String currency) {
         super();
 
-        this.setAccountId(accountId);
         this.setAmount(amount);
         this.setCurrency(currency);
     }
 
-    public DepositCommand() {
+    public TransactionRequest() {
         super();
-    }
-
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
     }
 
     public Double getAmount() {

@@ -1,4 +1,4 @@
-package com.demobank.account.application.account;
+package com.demobank.account.application.transaction;
 
 public class WithdrawCommand {
 

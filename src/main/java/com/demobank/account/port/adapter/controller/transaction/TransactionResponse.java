@@ -1,14 +1,16 @@
-package com.demobank.account.port.adapter.controller.account;
+package com.demobank.account.port.adapter.controller.transaction;
+
+import java.util.UUID;
 
 public class TransactionResponse {
     private String status;
-    private String transactionId;
-    private double newBalance;
+    private UUID transactionId;
+    private Double newBalance;
     private String newBalanceCurrency;
 
     public TransactionResponse() {}
 
-    public TransactionResponse(String status, String transactionId, double newBalance, String newBalanceCurrency) {
+    public TransactionResponse(String status, UUID transactionId, Double newBalance, String newBalanceCurrency) {
         this.setStatus(status);
         this.setTransactionId(transactionId);
         this.setNewBalance(newBalance);
@@ -23,19 +25,19 @@ public class TransactionResponse {
         this.status = status;
     }
 
-    public String getTransactionId() {
+    public UUID getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(String transactionId) {
+    public void setTransactionId(UUID transactionId) {
         this.transactionId = transactionId;
     }
 
-    public double getNewBalance() {
+    public Double getNewBalance() {
         return newBalance;
     }
 
-    public void setNewBalance(double newBalance) {
+    public void setNewBalance(Double newBalance) {
         this.newBalance = newBalance;
     }
 

@@ -1,17 +1,15 @@
-package com.demobank.account.port.adapter.service.fees;
+package com.demobank.account.port.adapter.service.currency;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import org.springframework.http.MediaType;
 
-import com.demobank.account.domain.model.fees.FeesService;
-import com.demobank.account.domain.model.fees.FeesStatus;
-import com.demobank.account.domain.model.fees.TransactionFees;
-import com.demobank.account.domain.model.transaction.TransactionType;
+import com.demobank.account.domain.model.currency.ConvertedAmount;
+import com.demobank.account.domain.model.currency.CurrencyService;
 
 @Service
-public class FeesServiceREST implements FeesService {
+public class RESTCurrencyService implements CurrencyService {
 
     private String baseUrl;
 
@@ -19,9 +17,9 @@ public class FeesServiceREST implements FeesService {
 
     private RestClient.Builder restClientBuilder;
 
-    public FeesServiceREST() {
+    public RESTCurrencyService() {
         super();
-        this.setBaseUrl("http://localhost:8081/api/v1/fees");
+        this.setBaseUrl("http://localhost:8082/api/v1/currency");
         this.setRestClientBuilder(RestClient.builder());
         DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory(this.getBaseUrl());
         this.setRestClient(this.getRestClientBuilder().uriBuilderFactory(factory).build());
@@ -51,14 +49,14 @@ public class FeesServiceREST implements FeesService {
         this.restClientBuilder = restClientBuilder;
     }
 
-    public TransactionFees calculateTransactionFees(TransactionType transactionType, double amount, String currency) {
-        TransactionFeesResponse transactionFeesResponse = this.getRestClient().post()
-            .uri("/transaction")
+    public ConvertedAmount convertAmount(String fromCurrencyCode, Double amount, String toCurrencyCode) {
+        ConvertAmountResponse convertAmountResponse = this.getRestClient().post()
+            .uri("/{fromCurrencyCode}/convert", fromCurrencyCode)
             .contentType(MediaType.APPLICATION_JSON)
-            .body(new TransactionFeesRequest(transactionType.toString(), amount, currency))
+            .body(new ConvertAmountRequest(amount, toCurrencyCode))
             .retrieve()
-            .body(TransactionFeesResponse.class);
+            .body(ConvertAmountResponse.class);
         
-        return new TransactionFees(transactionType, amount, currency, FeesStatus.valueOf(transactionFeesResponse.getStatus()), transactionFeesResponse.getFees(), transactionFeesResponse.getFeesCurrency());
+        return new ConvertedAmount(fromCurrencyCode, amount, toCurrencyCode, convertAmountResponse.getStatus(), convertAmountResponse.getConvertedAmount());
     }
 }

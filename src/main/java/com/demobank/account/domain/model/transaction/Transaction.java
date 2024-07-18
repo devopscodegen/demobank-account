@@ -1,28 +1,44 @@
-package com.demobank.account.domain.model.account;
+package com.demobank.account.domain.model.transaction;
 
+import java.util.UUID;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 public class Transaction {
+
+    @Id
+    private UUID transactionId;
     private String accountId;
     private Double amount;
     private String currency;
     private TransactionStatus transactionStatus;
-    private String transactionId;
-    private double newBalance;
+    private Double newBalance;
     private String newBalanceCurrency;
 
-    public Transaction(String accountId, Double amount, String currency, TransactionStatus transactionStatus, String transactionId, double newBalance, String newBalanceCurrency) {
+    public Transaction(UUID transactionId, String accountId, Double amount, String currency, TransactionStatus transactionStatus, Double newBalance, String newBalanceCurrency) {
         super();
 
+        this.setTransactionId(transactionId);
         this.setAccountId(accountId);
         this.setAmount(amount);
         this.setCurrency(currency);
         this.setStatus(transactionStatus);
-        this.setTransactionId(transactionId);
         this.setNewBalance(newBalance);
         this.setNewBalanceCurrency(newBalanceCurrency);
     }
 
     public Transaction() {
         super();
+    }
+
+    public UUID getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(UUID transactionId) {
+        this.transactionId = transactionId;
     }
 
     public String getAccountId() {
@@ -57,19 +73,11 @@ public class Transaction {
         this.transactionStatus = transactionStatus;
     }
 
-    public String getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public double getNewBalance() {
+    public Double getNewBalance() {
         return newBalance;
     }
 
-    public void setNewBalance(double newBalance) {
+    public void setNewBalance(Double newBalance) {
         this.newBalance = newBalance;
     }
 
