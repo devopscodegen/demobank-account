@@ -1,20 +1,20 @@
-package com.demobank.account.application.transaction;
+package com.demobank.account.application.account;
 
-public class DepositCommand {
+public class WithdrawCommand {
 
     private String accountId;
     private Double amount;
-    private String currency;
+    private String currencyCode;
 
-    public DepositCommand(String accountId, Double amount, String currency) {
+    public WithdrawCommand(String accountId, Double amount, String currencyCode) {
         super();
 
         this.setAccountId(accountId);
         this.setAmount(amount);
-        this.setCurrency(currency);
+        this.setCurrencyCode(currencyCode);
     }
 
-    public DepositCommand() {
+    public WithdrawCommand() {
         super();
     }
 
@@ -34,11 +34,11 @@ public class DepositCommand {
         this.amount = amount;
     }
 
-    public String getCurrency() {
-        return currency;
+    public String getCurrencyCode() {
+        return currencyCode;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
     }
 }

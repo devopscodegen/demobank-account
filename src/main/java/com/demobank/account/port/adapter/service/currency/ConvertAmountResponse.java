@@ -23,7 +23,7 @@ public class ConvertAmountResponse {
         return convertedAmount;
     }
 
-    public void setConvertedAmount(Double currency) {
-        this.convertedAmount = currency;
+    public void setConvertedAmount(Double currencyCode) {
+        this.convertedAmount = currencyCode;
     }
 }

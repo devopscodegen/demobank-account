@@ -6,15 +6,15 @@ public class TransactionResponse {
     private String status;
     private UUID transactionId;
     private Double newBalance;
-    private String newBalanceCurrency;
+    private String newBalanceCurrencyCode;
 
     public TransactionResponse() {}
 
-    public TransactionResponse(String status, UUID transactionId, Double newBalance, String newBalanceCurrency) {
+    public TransactionResponse(String status, UUID transactionId, Double newBalance, String newBalanceCurrencyCode) {
         this.setStatus(status);
         this.setTransactionId(transactionId);
         this.setNewBalance(newBalance);
-        this.setNewBalanceCurrency(newBalanceCurrency);
+        this.setNewBalanceCurrencyCode(newBalanceCurrencyCode);
     }
 
     public String getStatus() {
@@ -41,11 +41,11 @@ public class TransactionResponse {
         this.newBalance = newBalance;
     }
 
-    public String getNewBalanceCurrency() {
-        return newBalanceCurrency;
+    public String getNewBalanceCurrencyCode() {
+        return newBalanceCurrencyCode;
     }
 
-    public void setNewBalanceCurrency(String newBalanceCurrency) {
-        this.newBalanceCurrency = newBalanceCurrency;
+    public void setNewBalanceCurrencyCode(String newBalanceCurrencyCode) {
+        this.newBalanceCurrencyCode = newBalanceCurrencyCode;
     }
 }

@@ -2,13 +2,13 @@ package com.demobank.account.port.adapter.controller.transaction;
 
 public class TransactionRequest {
     private Double amount;
-    private String currency;
+    private String currencyCode;
 
-    public TransactionRequest(Double amount, String currency) {
+    public TransactionRequest(Double amount, String currencyCode) {
         super();
 
         this.setAmount(amount);
-        this.setCurrency(currency);
+        this.setCurrencyCode(currencyCode);
     }
 
     public TransactionRequest() {
@@ -23,11 +23,11 @@ public class TransactionRequest {
         this.amount = amount;
     }
 
-    public String getCurrency() {
-        return currency;
+    public String getCurrencyCode() {
+        return currencyCode;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
     }
 }

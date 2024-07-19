@@ -1,5 +1,6 @@
 package com.demobank.account.port.adapter.controller.account;
 
+import org.aspectj.apache.bcel.classfile.Module.Open;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.demobank.account.application.transaction.DepositCommand;
-import com.demobank.account.application.transaction.TransactionApplicationService;
-import com.demobank.account.application.transaction.WithdrawCommand;
+import com.demobank.account.application.account.AccountApplicationService;
+import com.demobank.account.application.account.DepositCommand;
+import com.demobank.account.application.account.OpenAccountCommand;
+import com.demobank.account.application.account.WithdrawCommand;
+import com.demobank.account.domain.model.account.Account;
 import com.demobank.account.domain.model.transaction.Transaction;
 import com.demobank.account.port.adapter.controller.transaction.TransactionRequest;
 import com.demobank.account.port.adapter.controller.transaction.TransactionResponse;
@@ -18,7 +21,18 @@ import com.demobank.account.port.adapter.controller.transaction.TransactionRespo
 @RequestMapping("/api/v1/account")
 public class AccountController {
     @Autowired
-    private TransactionApplicationService accountApplicationService;
+    private AccountApplicationService accountApplicationService;
+
+    @PostMapping("/{accountId}")
+    public OpenAccountResponse open(@PathVariable String accountId, @RequestBody OpenAccountRequest request) {
+        this.accountApplicationService.open(
+            new OpenAccountCommand(
+                accountId,
+                request.getBalanceCurrencyCode()));
+        
+        return new OpenAccountResponse(
+            "SUCCESS");
+    }
 
     @PostMapping("/{accountId}/withdraw")
     public TransactionResponse withdraw(@PathVariable String accountId, @RequestBody TransactionRequest request) {
@@ -26,13 +40,13 @@ public class AccountController {
             new WithdrawCommand(
                 accountId,
                 request.getAmount(), 
-                request.getCurrency()));
+                request.getCurrencyCode()));
                 
         return new TransactionResponse(
             transaction.getStatus().toString(), 
             transaction.getTransactionId(),
             transaction.getNewBalance(), 
-            transaction.getNewBalanceCurrency());
+            transaction.getNewBalanceCurrencyCode());
     }
 
     @PostMapping("/{accountId}/deposit")
@@ -41,12 +55,12 @@ public class AccountController {
             new DepositCommand(
                 accountId,
                 request.getAmount(), 
-                request.getCurrency()));
+                request.getCurrencyCode()));
 
         return new TransactionResponse(
             transaction.getStatus().toString(), 
             transaction.getTransactionId(),
             transaction.getNewBalance(), 
-            transaction.getNewBalanceCurrency());
+            transaction.getNewBalanceCurrencyCode());
     }
 }

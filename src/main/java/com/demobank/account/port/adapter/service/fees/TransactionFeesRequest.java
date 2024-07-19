@@ -4,14 +4,14 @@ public class TransactionFeesRequest {
 
     private String transactionType;
     private Double amount;
-    private String currency;
+    private String currencyCode;
 
-    public TransactionFeesRequest(String transactionType, Double amount, String currency) {
+    public TransactionFeesRequest(String transactionType, Double amount, String currencyCode) {
         super();
 
         this.setTransactionType(transactionType);
         this.setAmount(amount);
-        this.setCurrency(currency);
+        this.setCurrencyCode(currencyCode);
     }
 
     public TransactionFeesRequest() {
@@ -34,11 +34,11 @@ public class TransactionFeesRequest {
         this.amount = amount;
     }
 
-    public String getCurrency() {
-        return currency;
+    public String getCurrencyCode() {
+        return currencyCode;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
     }
 }

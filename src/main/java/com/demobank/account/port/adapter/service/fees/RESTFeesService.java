@@ -50,14 +50,14 @@ public class RESTFeesService implements FeesService {
         this.restClientBuilder = restClientBuilder;
     }
 
-    public TransactionFees calculateTransactionFees(TransactionType transactionType, Double amount, String currency) {
+    public TransactionFees calculateTransactionFees(TransactionType transactionType, Double amount, String currencyCode) {
         TransactionFeesResponse transactionFeesResponse = this.getRestClient().post()
             .uri("/transaction")
             .contentType(MediaType.APPLICATION_JSON)
-            .body(new TransactionFeesRequest(transactionType.toString(), amount, currency))
+            .body(new TransactionFeesRequest(transactionType.toString(), amount, currencyCode))
             .retrieve()
             .body(TransactionFeesResponse.class);
         
-        return new TransactionFees(transactionType, amount, currency, String.valueOf(transactionFeesResponse.getStatus()), transactionFeesResponse.getFees(), transactionFeesResponse.getFeesCurrency());
+        return new TransactionFees(transactionType, amount, currencyCode, String.valueOf(transactionFeesResponse.getStatus()), transactionFeesResponse.getFees(), transactionFeesResponse.getFeesCurrencyCode());
     }
 }

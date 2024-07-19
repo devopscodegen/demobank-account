@@ -5,20 +5,20 @@ import com.demobank.account.domain.model.transaction.TransactionType;
 public class TransactionFees {
     private TransactionType transactionType;
     private Double amount;
-    private String currency;
+    private String currencyCode;
     private String feesStatus;
     private Double fees;
-    private String feesCurrency;
+    private String feesCurrencyCode;
 
-    public TransactionFees(TransactionType transactionType, Double amount, String currency, String feesStatus, Double fees, String feesCurrency) {
+    public TransactionFees(TransactionType transactionType, Double amount, String currencyCode, String feesStatus, Double fees, String feesCurrencyCode) {
         super();
 
         this.setTransactionType(transactionType);
         this.setAmount(amount);
-        this.setCurrency(currency);
+        this.setCurrencyCode(currencyCode);
         this.setStatus(feesStatus);
         this.setFees(fees);
-        this.setFeesCurrency(feesCurrency);
+        this.setFeesCurrencyCode(feesCurrencyCode);
     }
 
     public TransactionFees() {
@@ -41,12 +41,12 @@ public class TransactionFees {
         this.amount = amount;
     }
 
-    public String getCurrency() {
-        return currency;
+    public String getCurrencyCode() {
+        return currencyCode;
     }
 
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
     }
 
     public String getStatus() {
@@ -65,11 +65,11 @@ public class TransactionFees {
         this.fees = fees;
     }
 
-    public String getFeesCurrency() {
-        return feesCurrency;
+    public String getFeesCurrencyCode() {
+        return feesCurrencyCode;
     }
 
-    public void setFeesCurrency(String feesCurrency) {
-        this.feesCurrency = feesCurrency;
+    public void setFeesCurrencyCode(String feesCurrencyCode) {
+        this.feesCurrencyCode = feesCurrencyCode;
     }
 }

@@ -3,14 +3,14 @@ package com.demobank.account.port.adapter.service.fees;
 public class TransactionFeesResponse {
     private String status;
     private Double fees;
-    private String feesCurrency;
+    private String feesCurrencyCode;
 
     public TransactionFeesResponse() {}
 
-    public TransactionFeesResponse(String status, Double fees, String feesCurrency) {
+    public TransactionFeesResponse(String status, Double fees, String feesCurrencyCode) {
         this.setStatus(status);
         this.setFees(fees);
-        this.setFeesCurrency(feesCurrency);
+        this.setFeesCurrencyCode(feesCurrencyCode);
     }
 
     public String getStatus() {
@@ -29,11 +29,11 @@ public class TransactionFeesResponse {
         this.fees = fees;
     }
 
-    public String getFeesCurrency() {
-        return feesCurrency;
+    public String getFeesCurrencyCode() {
+        return feesCurrencyCode;
     }
 
-    public void setFeesCurrency(String feesCurrency) {
-        this.feesCurrency = feesCurrency;
+    public void setFeesCurrencyCode(String feesCurrencyCode) {
+        this.feesCurrencyCode = feesCurrencyCode;
     }
 }
