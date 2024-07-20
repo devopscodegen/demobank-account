@@ -16,6 +16,7 @@ import com.demobank.account.domain.model.fees.FeesService;
 import com.demobank.account.domain.model.money.Money;
 
 @Service
+@org.jmolecules.ddd.annotation.Service
 public class AccountApplicationService {
 
     @Autowired

@@ -12,8 +12,12 @@ import org.springframework.util.Assert;
 
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
+@SuperBuilder
+@NoArgsConstructor
 public abstract class BaseAggregateRoot<A extends BaseAggregateRoot<A, Id>, Id extends Serializable> extends BaseEntity<Id> {
 
 	private transient final @Transient List<Object> domainEvents = new ArrayList<>();

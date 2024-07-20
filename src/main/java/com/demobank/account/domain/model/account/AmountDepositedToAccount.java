@@ -2,10 +2,12 @@ package com.demobank.account.domain.model.account;
 
 import java.util.Date;
 
+import org.jmolecules.event.types.DomainEvent;
+
 import com.demobank.account.domain.model.account.transaction.Transaction;
 import com.demobank.account.domain.model.common.BaseDomainEvent;
 
-public class AmountDepositedToAccount extends BaseDomainEvent {
+public class AmountDepositedToAccount extends BaseDomainEvent implements DomainEvent {
     private Transaction transaction;
 
     public AmountDepositedToAccount() {

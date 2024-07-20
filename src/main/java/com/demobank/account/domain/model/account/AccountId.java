@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Objects;
 
+import org.jmolecules.ddd.types.Identifier;
 import org.springframework.util.Assert;
 
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class AccountId implements Serializable, Comparable<AccountId>{
+public class AccountId implements Serializable, Comparable<AccountId>, Identifier{
 
     private static final long serialVersionUID = 1L;
     private BigInteger id;

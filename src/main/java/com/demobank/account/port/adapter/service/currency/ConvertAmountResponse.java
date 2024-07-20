@@ -2,30 +2,20 @@ package com.demobank.account.port.adapter.service.currency;
 
 import java.math.BigDecimal;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class ConvertAmountResponse {
     private String status;
     private BigDecimal convertedAmount;
-
-    public ConvertAmountResponse() {}
-
-    public ConvertAmountResponse(String status, BigDecimal convertedAmount) {
-        this.setStatus(status);
-        this.setConvertedAmount(convertedAmount);
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    private void setStatus(String status) {
-        this.status = status;
-    }
-
-    public BigDecimal getConvertedAmount() {
-        return convertedAmount;
-    }
-
-    private void setConvertedAmount(BigDecimal currencyCode) {
-        this.convertedAmount = currencyCode;
-    }
 }

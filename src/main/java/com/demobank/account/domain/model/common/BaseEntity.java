@@ -9,8 +9,12 @@ import jakarta.annotation.Nonnull;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Version;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
+@SuperBuilder
+@NoArgsConstructor
 public abstract class BaseEntity<Id extends Serializable> implements Persistable<Id> {
 
     @Version

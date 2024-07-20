@@ -43,7 +43,7 @@ public class AccountController {
                 request.getCurrencyCode()));
                 
         return new TransactionResponse(
-            transaction.getStatus().toString(), 
+            transaction.getTransactionStatus().toString(), 
             transaction.getTransactionId().getId(),
             transaction.getNewBalance().getAmount(), 
             transaction.getNewBalance().getCurrencyCode().toString()
@@ -59,7 +59,7 @@ public class AccountController {
                 request.getCurrencyCode()));
 
         return new TransactionResponse(
-            transaction.getStatus().toString(), 
+            transaction.getTransactionStatus().toString(), 
             transaction.getTransactionId().getId(),
             transaction.getNewBalance().getAmount(), 
             transaction.getNewBalance().getCurrencyCode().toString()

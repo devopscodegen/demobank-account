@@ -2,6 +2,8 @@ package com.demobank.account.domain.model.account;
 
 import java.util.Set;
 
+import org.jmolecules.ddd.types.AggregateRoot;
+
 import com.demobank.account.domain.model.account.transaction.Transaction;
 import com.demobank.account.domain.model.account.transaction.TransactionId;
 import com.demobank.account.domain.model.account.transaction.TransactionStatus;
@@ -18,10 +20,20 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name="accounts")
-public class Account extends BaseAggregateRoot<Account, AccountId> {
+@Getter
+@SuperBuilder
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
+@ToString
+public class Account extends BaseAggregateRoot<Account, AccountId> implements AggregateRoot<Account, AccountId> {
 
     @EmbeddedId
     @AttributeOverrides({
@@ -29,6 +41,7 @@ public class Account extends BaseAggregateRoot<Account, AccountId> {
             name="id", 
             column=@jakarta.persistence.Column(name="account_id"))
     })
+    @EqualsAndHashCode.Include
     private AccountId accountId;
     @Embedded
     private Money balance;
@@ -40,23 +53,11 @@ public class Account extends BaseAggregateRoot<Account, AccountId> {
         this.setBalance(balance);
         registerEvent(new AccountOpened(this));
     }
-    public Account() {
-        super();
-    }
-    public AccountId getAccountId() {
-        return accountId;
-    }
     private void setAccountId(AccountId accountId) {
         this.accountId = accountId;
     }
-    public Money getBalance() {
-        return balance;
-    }
     private void setBalance(Money balance) {
         this.balance = balance;
-    }
-    private Set<Transaction> getTransactions() {
-        return this.transactions;
     }
     public Transaction withdrawAmount(Money amount, Money amountConvertedToAccountBalanceCurrencyCode, Money transactionFees) {
 
@@ -92,13 +93,6 @@ public class Account extends BaseAggregateRoot<Account, AccountId> {
 
         return transaction;
     }
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((accountId == null) ? 0 : accountId.hashCode());
-        return result;
-    }
     @Nullable
 	@Override
 	public AccountId getId() {
@@ -109,24 +103,4 @@ public class Account extends BaseAggregateRoot<Account, AccountId> {
 	public boolean isNew() {
 		return null == getId();
 	}
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Account other = (Account) obj;
-        if (accountId == null) {
-            if (other.accountId != null)
-                return false;
-        } else if (!accountId.equals(other.accountId))
-            return false;
-        return true;
-    }
-    @Override
-    public String toString() {
-        return "Account [accountId=" + accountId + ", balance=" + balance + ", transactions=" + transactions + "]";
-    }
 }

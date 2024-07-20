@@ -2,9 +2,11 @@ package com.demobank.account.domain.model.account;
 
 import java.util.Date;
 
+import org.jmolecules.event.types.DomainEvent;
+
 import com.demobank.account.domain.model.common.BaseDomainEvent;
 
-public class AccountOpened extends BaseDomainEvent {
+public class AccountOpened extends BaseDomainEvent implements DomainEvent {
     private Account account;
 
     public AccountOpened() {

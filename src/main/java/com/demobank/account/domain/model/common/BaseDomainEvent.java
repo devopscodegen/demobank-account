@@ -5,7 +5,7 @@ import java.util.Date;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public abstract class BaseDomainEvent implements DomainEvent{
+public abstract class BaseDomainEvent{
     
     private int eventVersion;
     private Date occurredOn;

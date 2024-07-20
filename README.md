@@ -6,7 +6,7 @@ Account Application Component of Demo Bank using below technologies
 
 Add Common React Frontend Application Component for all
 Add JPA Persistence - Done
-Add Events
+Add Events - Done
 Add Data Ingestion Pipeline Application Component
 Call currency service - Done
 Add account open operation - Done

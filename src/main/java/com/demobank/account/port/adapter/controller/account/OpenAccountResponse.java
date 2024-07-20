@@ -1,19 +1,18 @@
 package com.demobank.account.port.adapter.controller.account;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class OpenAccountResponse {
     private String status;
-
-    public OpenAccountResponse() {}
-
-    public OpenAccountResponse(String status) {
-        this.setStatus(status);
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    private void setStatus(String status) {
-        this.status = status;
-    }
 }

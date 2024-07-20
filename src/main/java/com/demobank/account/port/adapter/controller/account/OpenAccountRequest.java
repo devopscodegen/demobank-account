@@ -1,33 +1,19 @@
 package com.demobank.account.port.adapter.controller.account;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class OpenAccountRequest {
     private String accountId;
     private String balanceCurrencyCode;
-
-    public OpenAccountRequest(String accountId, String balanceCurrencyCode) {
-        super();
-
-        this.setAccountId(accountId);
-        this.setBalanceCurrencyCode(balanceCurrencyCode);
-    }
-
-    public OpenAccountRequest() {
-        super();
-    }
-
-    public String getAccoundId() {
-        return this.accountId;
-    }
-
-    private void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
-
-    public String getBalanceCurrencyCode() {
-        return this.balanceCurrencyCode;
-    }
-
-    private void setBalanceCurrencyCode(String balanceCurrencyCode) {
-        this.balanceCurrencyCode = balanceCurrencyCode;
-    }
 }
