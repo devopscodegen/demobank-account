@@ -19,7 +19,7 @@ public class OpenAccountRequest {
         return this.accountId;
     }
 
-    public void setAccountId(String accountId) {
+    private void setAccountId(String accountId) {
         this.accountId = accountId;
     }
 
@@ -27,7 +27,7 @@ public class OpenAccountRequest {
         return this.balanceCurrencyCode;
     }
 
-    public void setBalanceCurrencyCode(String balanceCurrencyCode) {
+    private void setBalanceCurrencyCode(String balanceCurrencyCode) {
         this.balanceCurrencyCode = balanceCurrencyCode;
     }
 }

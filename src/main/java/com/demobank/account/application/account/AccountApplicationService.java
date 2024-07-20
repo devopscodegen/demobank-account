@@ -3,16 +3,17 @@ package com.demobank.account.application.account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.math.BigDecimal;
 
 import com.demobank.account.domain.model.account.Account;
+import com.demobank.account.domain.model.account.AccountId;
 import com.demobank.account.domain.model.account.AccountRepository;
+import com.demobank.account.domain.model.account.transaction.Transaction;
+import com.demobank.account.domain.model.account.transaction.TransactionType;
+import com.demobank.account.domain.model.currency.CurrencyCode;
 import com.demobank.account.domain.model.currency.CurrencyService;
 import com.demobank.account.domain.model.fees.FeesService;
-import com.demobank.account.domain.model.transaction.Transaction;
-import com.demobank.account.domain.model.transaction.TransactionIdService;
-import com.demobank.account.domain.model.transaction.TransactionRepository;
-import com.demobank.account.domain.model.transaction.TransactionStatus;
-import com.demobank.account.domain.model.transaction.TransactionType;
+import com.demobank.account.domain.model.money.Money;
 
 @Service
 public class AccountApplicationService {
@@ -26,39 +27,35 @@ public class AccountApplicationService {
     @Autowired
     private AccountRepository accountRepository;
 
-    @Autowired
-    private TransactionRepository transactionRepository;
-
-    @Autowired
-    private TransactionIdService transactionIdService;
-
-    public Account open(OpenAccountCommand aCommand) {
+    public Account openAccount(OpenAccountCommand openAccountCommand) {
         Account account = new Account(
-            aCommand.getAccountId(), 
-            0.0, 
-            aCommand.getBalanceCurrencyCode());
+            new AccountId(openAccountCommand.getAccountId()),
+            new Money(new BigDecimal(0), CurrencyCode.valueOf(openAccountCommand.getBalanceCurrencyCode()))
+        );
         
         account = this.accountRepository.save(account);
 
         return account;
     }
     @Transactional
-    public Transaction withdraw(WithdrawCommand aCommand) {
+    public Transaction withdrawAmountFromAccount(WithdrawAmountFromAccountCommand withdrawAmountFromAccountCommand) {
 
-        Account account = this.accountRepository.findById(aCommand.getAccountId()).get();
+        Account account = this.accountRepository.findById(new AccountId(withdrawAmountFromAccountCommand.getAccountId())).get();
 
-        Transaction transaction = new Transaction(
-            transactionIdService.nextIdentity(),
-            account.getAccountId(), 
-            aCommand.getAmount(), 
-            aCommand.getCurrencyCode(), 
-            TransactionStatus.SUCCESS,  
-            account.getBalance() - this.currencyService.convertAmount(aCommand.getCurrencyCode(),aCommand.getAmount(),account.getBalanceCurrencyCode()).getConvertedAmount() - this.feesService.calculateTransactionFees(TransactionType.WITHDRAW, aCommand.getAmount(), aCommand.getCurrencyCode()).getFees(),
-            "USD");
-
-        account.newBalance(transaction.getNewBalance());
-        
-        transaction = this.transactionRepository.save(transaction);
+        Money amount = new Money(
+            withdrawAmountFromAccountCommand.getAmount(), 
+            CurrencyCode.valueOf(withdrawAmountFromAccountCommand.getCurrencyCode())
+        );
+        Transaction transaction = account.withdrawAmount(
+            amount,
+            this.currencyService.convertAmount(
+                amount,
+                account.getBalance().getCurrencyCode()
+            ).getConvertedAmount(),
+            this.feesService.calculateTransactionFees(
+                TransactionType.WITHDRAW, 
+                amount).getFees()
+        );
 
         account = this.accountRepository.save(account);
 
@@ -66,21 +63,23 @@ public class AccountApplicationService {
     }
 
     @Transactional
-    public Transaction deposit(DepositCommand aCommand) {
-        Account account = this.accountRepository.findById(aCommand.getAccountId()).get();
+    public Transaction depositAmountToAccount(DepositAmountToAccountCommand depositAmountFromAccountCommand) {
+        Account account = this.accountRepository.findById(new AccountId(depositAmountFromAccountCommand.getAccountId())).get();
 
-        Transaction transaction = new Transaction(
-            transactionIdService.nextIdentity(),
-            account.getAccountId(), 
-            aCommand.getAmount(), 
-            aCommand.getCurrencyCode(), 
-            TransactionStatus.SUCCESS,  
-            account.getBalance() + this.currencyService.convertAmount(aCommand.getCurrencyCode(),aCommand.getAmount(),account.getBalanceCurrencyCode()).getConvertedAmount() - this.feesService.calculateTransactionFees(TransactionType.WITHDRAW, aCommand.getAmount(), aCommand.getCurrencyCode()).getFees(),
-            "USD");
-
-        account.newBalance(transaction.getNewBalance());
-        
-        transaction = this.transactionRepository.save(transaction);
+        Money amount = new Money(
+            depositAmountFromAccountCommand.getAmount(), 
+            CurrencyCode.valueOf(depositAmountFromAccountCommand.getCurrencyCode())
+        );
+        Transaction transaction = account.depositAmount(
+            amount,
+            this.currencyService.convertAmount(
+                amount,
+                account.getBalance().getCurrencyCode()
+            ).getConvertedAmount(),
+            this.feesService.calculateTransactionFees(
+                TransactionType.DEPOSIT, 
+                amount).getFees()
+        );
 
         account = this.accountRepository.save(account);
 

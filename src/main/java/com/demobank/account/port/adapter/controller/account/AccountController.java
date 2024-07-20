@@ -1,6 +1,7 @@
 package com.demobank.account.port.adapter.controller.account;
 
-import org.aspectj.apache.bcel.classfile.Module.Open;
+import java.math.BigInteger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -9,13 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demobank.account.application.account.AccountApplicationService;
-import com.demobank.account.application.account.DepositCommand;
+import com.demobank.account.application.account.DepositAmountToAccountCommand;
 import com.demobank.account.application.account.OpenAccountCommand;
-import com.demobank.account.application.account.WithdrawCommand;
-import com.demobank.account.domain.model.account.Account;
-import com.demobank.account.domain.model.transaction.Transaction;
-import com.demobank.account.port.adapter.controller.transaction.TransactionRequest;
-import com.demobank.account.port.adapter.controller.transaction.TransactionResponse;
+import com.demobank.account.application.account.WithdrawAmountFromAccountCommand;
+import com.demobank.account.domain.model.account.transaction.Transaction;
+import com.demobank.account.port.adapter.controller.account.transaction.TransactionRequest;
+import com.demobank.account.port.adapter.controller.account.transaction.TransactionResponse;
 
 @RestController
 @RequestMapping("/api/v1/account")
@@ -24,8 +24,8 @@ public class AccountController {
     private AccountApplicationService accountApplicationService;
 
     @PostMapping("/{accountId}")
-    public OpenAccountResponse open(@PathVariable String accountId, @RequestBody OpenAccountRequest request) {
-        this.accountApplicationService.open(
+    public OpenAccountResponse openAccount(@PathVariable BigInteger accountId, @RequestBody OpenAccountRequest request) {
+        this.accountApplicationService.openAccount(
             new OpenAccountCommand(
                 accountId,
                 request.getBalanceCurrencyCode()));
@@ -35,32 +35,34 @@ public class AccountController {
     }
 
     @PostMapping("/{accountId}/withdraw")
-    public TransactionResponse withdraw(@PathVariable String accountId, @RequestBody TransactionRequest request) {
-        Transaction transaction = this.accountApplicationService.withdraw(
-            new WithdrawCommand(
+    public TransactionResponse withdrawAmountFromAccount(@PathVariable BigInteger accountId, @RequestBody TransactionRequest request) {
+        Transaction transaction = this.accountApplicationService.withdrawAmountFromAccount(
+            new WithdrawAmountFromAccountCommand(
                 accountId,
                 request.getAmount(), 
                 request.getCurrencyCode()));
                 
         return new TransactionResponse(
             transaction.getStatus().toString(), 
-            transaction.getTransactionId(),
-            transaction.getNewBalance(), 
-            transaction.getNewBalanceCurrencyCode());
+            transaction.getTransactionId().getId(),
+            transaction.getNewBalance().getAmount(), 
+            transaction.getNewBalance().getCurrencyCode().toString()
+        );
     }
 
     @PostMapping("/{accountId}/deposit")
-    public TransactionResponse deposit(@PathVariable String accountId, @RequestBody TransactionRequest request) {
-        Transaction transaction = this.accountApplicationService.deposit(
-            new DepositCommand(
+    public TransactionResponse depositAmountToAccount(@PathVariable BigInteger accountId, @RequestBody TransactionRequest request) {
+        Transaction transaction = this.accountApplicationService.depositAmountToAccount(
+            new DepositAmountToAccountCommand(
                 accountId,
                 request.getAmount(), 
                 request.getCurrencyCode()));
 
         return new TransactionResponse(
             transaction.getStatus().toString(), 
-            transaction.getTransactionId(),
-            transaction.getNewBalance(), 
-            transaction.getNewBalanceCurrencyCode());
+            transaction.getTransactionId().getId(),
+            transaction.getNewBalance().getAmount(), 
+            transaction.getNewBalance().getCurrencyCode().toString()
+        );
     }
 }

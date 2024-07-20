@@ -1,22 +1,24 @@
 package com.demobank.account.application.account;
 
+import java.math.BigInteger;
+
 public class OpenAccountCommand {
-    private String accountId;
+    private BigInteger accountId;
     private String balanceCurrencyCode;
-    public OpenAccountCommand(String accountId, String balanceCurrencyCode) {
-        this.accountId = accountId;
-        this.balanceCurrencyCode = balanceCurrencyCode;
+    public OpenAccountCommand(BigInteger accountId, String balanceCurrencyCode) {
+        this.setAccountId(accountId);
+        this.setBalanceCurrencyCode(balanceCurrencyCode);
     }
-    public String getAccountId() {
+    public BigInteger getAccountId() {
         return accountId;
     }
-    public void setAccountId(String accountId) {
+    private void setAccountId(BigInteger accountId) {
         this.accountId = accountId;
     }
     public String getBalanceCurrencyCode() {
         return balanceCurrencyCode;
     }
-    public void setBalanceCurrencyCode(String balanceCurrencyCode) {
+    private void setBalanceCurrencyCode(String balanceCurrencyCode) {
         this.balanceCurrencyCode = balanceCurrencyCode;
     }
 }

@@ -3,10 +3,14 @@ package com.demobank.account.port.adapter.service.currency;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
+
 import org.springframework.http.MediaType;
 
 import com.demobank.account.domain.model.currency.ConvertedAmount;
+import com.demobank.account.domain.model.currency.CurrencyCode;
 import com.demobank.account.domain.model.currency.CurrencyService;
+import com.demobank.account.domain.model.currency.CurrencyStatus;
+import com.demobank.account.domain.model.money.Money;
 
 @Service
 public class RESTCurrencyService implements CurrencyService {
@@ -25,7 +29,7 @@ public class RESTCurrencyService implements CurrencyService {
         this.setRestClient(this.getRestClientBuilder().uriBuilderFactory(factory).build());
     }
 
-    private String getBaseUrl() {
+    public String getBaseUrl() {
         return baseUrl;
     }
 
@@ -33,7 +37,7 @@ public class RESTCurrencyService implements CurrencyService {
         this.baseUrl = baseUrl;
     }
 
-    private RestClient getRestClient() {
+    public RestClient getRestClient() {
         return restClient;
     }
 
@@ -41,7 +45,7 @@ public class RESTCurrencyService implements CurrencyService {
         this.restClient = restClient;
     }
 
-    private RestClient.Builder getRestClientBuilder() {
+    public RestClient.Builder getRestClientBuilder() {
         return restClientBuilder;
     }
 
@@ -49,14 +53,18 @@ public class RESTCurrencyService implements CurrencyService {
         this.restClientBuilder = restClientBuilder;
     }
 
-    public ConvertedAmount convertAmount(String fromCurrencyCode, Double amount, String toCurrencyCode) {
+    public ConvertedAmount convertAmount(Money amount, CurrencyCode toCurrencyCode) {
         ConvertAmountResponse convertAmountResponse = this.getRestClient().post()
-            .uri("/{fromCurrencyCode}/convert", fromCurrencyCode)
+            .uri("/{fromCurrencyCode}/convert", amount.getCurrencyCode().toString())
             .contentType(MediaType.APPLICATION_JSON)
-            .body(new ConvertAmountRequest(amount, toCurrencyCode))
+            .body(new ConvertAmountRequest(amount.getCurrencyCode().toString(), amount.getAmount(), toCurrencyCode.toString()))
             .retrieve()
             .body(ConvertAmountResponse.class);
         
-        return new ConvertedAmount(fromCurrencyCode, amount, toCurrencyCode, convertAmountResponse.getStatus(), convertAmountResponse.getConvertedAmount());
+        return new ConvertedAmount(
+            amount, 
+            toCurrencyCode, 
+            CurrencyStatus.valueOf(convertAmountResponse.getStatus()), 
+            new Money(convertAmountResponse.getConvertedAmount(),toCurrencyCode));
     }
 }

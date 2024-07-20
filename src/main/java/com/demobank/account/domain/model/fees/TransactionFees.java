@@ -1,24 +1,21 @@
 package com.demobank.account.domain.model.fees;
 
-import com.demobank.account.domain.model.transaction.TransactionType;
+import com.demobank.account.domain.model.account.transaction.TransactionType;
+import com.demobank.account.domain.model.money.Money;
 
 public class TransactionFees {
     private TransactionType transactionType;
-    private Double amount;
-    private String currencyCode;
-    private String feesStatus;
-    private Double fees;
-    private String feesCurrencyCode;
+    private Money amount;
+    private FeesStatus feesStatus;
+    private Money fees;
 
-    public TransactionFees(TransactionType transactionType, Double amount, String currencyCode, String feesStatus, Double fees, String feesCurrencyCode) {
+    public TransactionFees(TransactionType transactionType, Money amount, FeesStatus feesStatus, Money fees) {
         super();
 
         this.setTransactionType(transactionType);
         this.setAmount(amount);
-        this.setCurrencyCode(currencyCode);
         this.setStatus(feesStatus);
         this.setFees(fees);
-        this.setFeesCurrencyCode(feesCurrencyCode);
     }
 
     public TransactionFees() {
@@ -29,47 +26,31 @@ public class TransactionFees {
         return transactionType;
     }
 
-    public void setTransactionType(TransactionType transactionType) {
+    private void setTransactionType(TransactionType transactionType) {
         this.transactionType = transactionType;
     }
 
-    public Double getAmount() {
+    public Money getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    private void setAmount(Money amount) {
         this.amount = amount;
     }
 
-    public String getCurrencyCode() {
-        return currencyCode;
-    }
-
-    public void setCurrencyCode(String currencyCode) {
-        this.currencyCode = currencyCode;
-    }
-
-    public String getStatus() {
+    public FeesStatus getStatus() {
         return feesStatus;
     }
 
-    public void setStatus(String feesStatus) {
+    private void setStatus(FeesStatus feesStatus) {
         this.feesStatus = feesStatus;
     }
 
-    public Double getFees() {
+    public Money getFees() {
         return fees;
     }
 
-    public void setFees(Double fees) {
+    private void setFees(Money fees) {
         this.fees = fees;
-    }
-
-    public String getFeesCurrencyCode() {
-        return feesCurrencyCode;
-    }
-
-    public void setFeesCurrencyCode(String feesCurrencyCode) {
-        this.feesCurrencyCode = feesCurrencyCode;
     }
 }

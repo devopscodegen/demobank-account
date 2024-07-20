@@ -1,10 +1,12 @@
-package com.demobank.account.port.adapter.controller.transaction;
+package com.demobank.account.port.adapter.controller.account.transaction;
+
+import java.math.BigDecimal;
 
 public class TransactionRequest {
-    private Double amount;
+    private BigDecimal amount;
     private String currencyCode;
 
-    public TransactionRequest(Double amount, String currencyCode) {
+    public TransactionRequest(BigDecimal amount, String currencyCode) {
         super();
 
         this.setAmount(amount);
@@ -15,11 +17,11 @@ public class TransactionRequest {
         super();
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    private void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -27,7 +29,7 @@ public class TransactionRequest {
         return currencyCode;
     }
 
-    public void setCurrencyCode(String currencyCode) {
+    private void setCurrencyCode(String currencyCode) {
         this.currencyCode = currencyCode;
     }
 }

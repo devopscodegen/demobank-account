@@ -1,33 +1,34 @@
-package com.demobank.account.port.adapter.service.fees;
+package com.demobank.account.application.account;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
-public class TransactionFeesRequest {
+public class DepositAmountToAccountCommand {
 
-    private String transactionType;
+    private BigInteger accountId;
     private BigDecimal amount;
     private String currencyCode;
 
-    public TransactionFeesRequest(String transactionType, BigDecimal amount, String currencyCode) {
+    public DepositAmountToAccountCommand(BigInteger accountId, BigDecimal amount, String currencyCode) {
         super();
 
-        this.setTransactionType(transactionType);
+        this.setAccountId(accountId);
         this.setAmount(amount);
         this.setCurrencyCode(currencyCode);
     }
 
-    public TransactionFeesRequest() {
+    public DepositAmountToAccountCommand() {
         super();
     }
 
-    public String getTransactionType() {
-        return transactionType;
+    public BigInteger getAccountId() {
+        return accountId;
     }
 
-    private void setTransactionType(String transactionType) {
-        this.transactionType = transactionType;
+    private void setAccountId(BigInteger accountId) {
+        this.accountId = accountId;
     }
-    
+
     public BigDecimal getAmount() {
         return amount;
     }

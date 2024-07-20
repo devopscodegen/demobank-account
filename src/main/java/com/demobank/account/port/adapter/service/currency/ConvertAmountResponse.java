@@ -1,12 +1,14 @@
 package com.demobank.account.port.adapter.service.currency;
 
+import java.math.BigDecimal;
+
 public class ConvertAmountResponse {
     private String status;
-    private Double convertedAmount;
+    private BigDecimal convertedAmount;
 
     public ConvertAmountResponse() {}
 
-    public ConvertAmountResponse(String status, Double convertedAmount) {
+    public ConvertAmountResponse(String status, BigDecimal convertedAmount) {
         this.setStatus(status);
         this.setConvertedAmount(convertedAmount);
     }
@@ -15,15 +17,15 @@ public class ConvertAmountResponse {
         return status;
     }
 
-    public void setStatus(String status) {
+    private void setStatus(String status) {
         this.status = status;
     }
 
-    public Double getConvertedAmount() {
+    public BigDecimal getConvertedAmount() {
         return convertedAmount;
     }
 
-    public void setConvertedAmount(Double currencyCode) {
+    private void setConvertedAmount(BigDecimal currencyCode) {
         this.convertedAmount = currencyCode;
     }
 }

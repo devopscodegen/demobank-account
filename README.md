@@ -9,7 +9,7 @@ Add JPA Persistence - Done
 Add Events
 Add Data Ingestion Pipeline Application Component
 Call currency service - Done
-
-Make Account as aggregate root and it needs to contain a Set of transactions. transaction is not an aggregate root. similar to backlogitem and tasks since backlogitemstatus is dependant on tasks estimateTaskHoursRemaining. Similarly, balance of the account is dependant on the transaction.
-
-Change currency to currency code
+Add account open operation - Done
+Change currency to currency code - Done
+Add jmolecules and DDD blog annotations and interfaces like AggregateRoot
+Add lombok getters, constructors and other best practices from jmolecules spring data jpa examples.

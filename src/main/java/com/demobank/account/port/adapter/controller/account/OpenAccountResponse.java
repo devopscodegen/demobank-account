@@ -13,7 +13,7 @@ public class OpenAccountResponse {
         return status;
     }
 
-    public void setStatus(String status) {
+    private void setStatus(String status) {
         this.status = status;
     }
 }

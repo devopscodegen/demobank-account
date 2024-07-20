@@ -1,7 +1,7 @@
 package com.demobank.account.domain.model.account;
 
-import org.springframework.data.repository.CrudRepository;
+import com.demobank.account.domain.model.common.BaseRepository;
 
-public interface AccountRepository extends CrudRepository<Account, String>{
+public interface AccountRepository extends BaseRepository<Account, AccountId>{
     
 }

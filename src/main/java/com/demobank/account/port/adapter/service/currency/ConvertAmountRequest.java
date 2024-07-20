@@ -1,13 +1,17 @@
 package com.demobank.account.port.adapter.service.currency;
 
+import java.math.BigDecimal;
+
 public class ConvertAmountRequest {
 
-    private Double amount;
+    private String fromCurrencyCode;
+    private BigDecimal amount;
     private String toCurrencyCode;
 
-    public ConvertAmountRequest(Double amount, String toCurrencyCode) {
+    public ConvertAmountRequest(String fromCurrencyCode, BigDecimal amount, String toCurrencyCode) {
         super();
 
+        this.setFromCurrencyCode(fromCurrencyCode);
         this.setAmount(amount);
         this.setToCurrencyCode(toCurrencyCode);
     }
@@ -16,11 +20,19 @@ public class ConvertAmountRequest {
         super();
     }
 
-    public Double getAmount() {
+    public String getFromCurrencyCode() {
+        return fromCurrencyCode;
+    }
+
+    private void setFromCurrencyCode(String fromCurrencyCode) {
+        this.fromCurrencyCode = fromCurrencyCode;
+    }
+    
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    private void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -28,7 +40,7 @@ public class ConvertAmountRequest {
         return toCurrencyCode;
     }
 
-    public void setToCurrencyCode(String toCurrencyCode) {
+    private void setToCurrencyCode(String toCurrencyCode) {
         this.toCurrencyCode = toCurrencyCode;
     }
 }

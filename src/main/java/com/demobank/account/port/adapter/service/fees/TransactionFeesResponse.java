@@ -1,13 +1,15 @@
 package com.demobank.account.port.adapter.service.fees;
 
+import java.math.BigDecimal;
+
 public class TransactionFeesResponse {
     private String status;
-    private Double fees;
+    private BigDecimal fees;
     private String feesCurrencyCode;
 
     public TransactionFeesResponse() {}
 
-    public TransactionFeesResponse(String status, Double fees, String feesCurrencyCode) {
+    public TransactionFeesResponse(String status, BigDecimal fees, String feesCurrencyCode) {
         this.setStatus(status);
         this.setFees(fees);
         this.setFeesCurrencyCode(feesCurrencyCode);
@@ -17,15 +19,15 @@ public class TransactionFeesResponse {
         return status;
     }
 
-    public void setStatus(String status) {
+    private void setStatus(String status) {
         this.status = status;
     }
 
-    public Double getFees() {
+    public BigDecimal getFees() {
         return fees;
     }
 
-    public void setFees(Double fees) {
+    private void setFees(BigDecimal fees) {
         this.fees = fees;
     }
 
@@ -33,7 +35,7 @@ public class TransactionFeesResponse {
         return feesCurrencyCode;
     }
 
-    public void setFeesCurrencyCode(String feesCurrencyCode) {
+    private void setFeesCurrencyCode(String feesCurrencyCode) {
         this.feesCurrencyCode = feesCurrencyCode;
     }
 }

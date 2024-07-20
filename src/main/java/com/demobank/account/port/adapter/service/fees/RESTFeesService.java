@@ -3,11 +3,15 @@ package com.demobank.account.port.adapter.service.fees;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
+
 import org.springframework.http.MediaType;
 
+import com.demobank.account.domain.model.account.transaction.TransactionType;
+import com.demobank.account.domain.model.currency.CurrencyCode;
 import com.demobank.account.domain.model.fees.FeesService;
+import com.demobank.account.domain.model.fees.FeesStatus;
 import com.demobank.account.domain.model.fees.TransactionFees;
-import com.demobank.account.domain.model.transaction.TransactionType;
+import com.demobank.account.domain.model.money.Money;
 
 @Service
 public class RESTFeesService implements FeesService {
@@ -26,7 +30,7 @@ public class RESTFeesService implements FeesService {
         this.setRestClient(this.getRestClientBuilder().uriBuilderFactory(factory).build());
     }
 
-    private String getBaseUrl() {
+    public String getBaseUrl() {
         return baseUrl;
     }
 
@@ -34,7 +38,7 @@ public class RESTFeesService implements FeesService {
         this.baseUrl = baseUrl;
     }
 
-    private RestClient getRestClient() {
+    public RestClient getRestClient() {
         return restClient;
     }
 
@@ -42,7 +46,7 @@ public class RESTFeesService implements FeesService {
         this.restClient = restClient;
     }
 
-    private RestClient.Builder getRestClientBuilder() {
+    public RestClient.Builder getRestClientBuilder() {
         return restClientBuilder;
     }
 
@@ -50,14 +54,22 @@ public class RESTFeesService implements FeesService {
         this.restClientBuilder = restClientBuilder;
     }
 
-    public TransactionFees calculateTransactionFees(TransactionType transactionType, Double amount, String currencyCode) {
+    public TransactionFees calculateTransactionFees(TransactionType transactionType, Money amount) {
         TransactionFeesResponse transactionFeesResponse = this.getRestClient().post()
             .uri("/transaction")
             .contentType(MediaType.APPLICATION_JSON)
-            .body(new TransactionFeesRequest(transactionType.toString(), amount, currencyCode))
+            .body(new TransactionFeesRequest(transactionType.toString(), amount.getAmount(), amount.getCurrencyCode().toString()))
             .retrieve()
             .body(TransactionFeesResponse.class);
         
-        return new TransactionFees(transactionType, amount, currencyCode, String.valueOf(transactionFeesResponse.getStatus()), transactionFeesResponse.getFees(), transactionFeesResponse.getFeesCurrencyCode());
+        return new TransactionFees(
+            transactionType, 
+            amount, 
+            FeesStatus.valueOf(transactionFeesResponse.getStatus()), 
+            new Money(
+                transactionFeesResponse.getFees(), 
+                CurrencyCode.valueOf(transactionFeesResponse.getFeesCurrencyCode())
+            )
+        );
     }
 }
