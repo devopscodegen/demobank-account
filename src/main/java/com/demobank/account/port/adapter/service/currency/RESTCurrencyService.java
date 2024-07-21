@@ -3,7 +3,7 @@ package com.demobank.account.port.adapter.service.currency;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
-
+import org.jmolecules.architecture.hexagonal.Adapter;
 import org.springframework.http.MediaType;
 
 import com.demobank.account.domain.model.currency.ConvertedAmount;
@@ -13,6 +13,7 @@ import com.demobank.account.domain.model.currency.CurrencyStatus;
 import com.demobank.account.domain.model.money.Money;
 
 @Service
+@Adapter
 public class RESTCurrencyService implements CurrencyService {
 
     private String baseUrl;

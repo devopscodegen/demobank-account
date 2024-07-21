@@ -1,5 +1,6 @@
 package com.demobank.account.application.account;
 
+import org.jmolecules.architecture.hexagonal.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +17,7 @@ import com.demobank.account.domain.model.fees.FeesService;
 import com.demobank.account.domain.model.money.Money;
 
 @Service
-@org.jmolecules.ddd.annotation.Service
+@Application
 public class AccountApplicationService {
 
     @Autowired

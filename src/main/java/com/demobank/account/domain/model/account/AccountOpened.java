@@ -2,24 +2,26 @@ package com.demobank.account.domain.model.account;
 
 import java.util.Date;
 
-import org.jmolecules.event.types.DomainEvent;
+import org.jmolecules.event.annotation.DomainEvent;
 
 import com.demobank.account.domain.model.common.BaseDomainEvent;
 
-public class AccountOpened extends BaseDomainEvent implements DomainEvent {
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString
+@DomainEvent
+public class AccountOpened extends BaseDomainEvent {
     private Account account;
-
-    public AccountOpened() {
-        super();
-    }
-
-    public Account getAccount() {
-        return this.account;
-    }
-
-    private void setAccount(Account account) {
-        this.account = account;
-    }
 
     public AccountOpened(Account account) {
         super();

@@ -1,6 +1,8 @@
 package com.demobank.account.domain.model.account.transaction;
 
-public enum TransactionStatus {
+import com.demobank.account.domain.model.common.BaseValueObject;
+
+public enum TransactionStatus implements BaseValueObject{
 
     SUCCESS {
         public boolean isSuccess() {

@@ -2,7 +2,7 @@ package com.demobank.account.domain.model.account;
 
 import java.util.Set;
 
-import org.jmolecules.ddd.types.AggregateRoot;
+import org.jmolecules.ddd.annotation.AggregateRoot;
 
 import com.demobank.account.domain.model.account.transaction.Transaction;
 import com.demobank.account.domain.model.account.transaction.TransactionId;
@@ -23,17 +23,20 @@ import jakarta.persistence.Transient;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name="accounts")
 @Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @ToString
-public class Account extends BaseAggregateRoot<Account, AccountId> implements AggregateRoot<Account, AccountId> {
+@AggregateRoot
+public class Account extends BaseAggregateRoot<Account, AccountId> {
 
     @EmbeddedId
     @AttributeOverrides({
@@ -52,12 +55,6 @@ public class Account extends BaseAggregateRoot<Account, AccountId> implements Ag
         this.setAccountId(accountId);
         this.setBalance(balance);
         registerEvent(new AccountOpened(this));
-    }
-    private void setAccountId(AccountId accountId) {
-        this.accountId = accountId;
-    }
-    private void setBalance(Money balance) {
-        this.balance = balance;
     }
     public Transaction withdrawAmount(Money amount, Money amountConvertedToAccountBalanceCurrencyCode, Money transactionFees) {
 
@@ -101,6 +98,6 @@ public class Account extends BaseAggregateRoot<Account, AccountId> implements Ag
 	@Transient
 	@Override
 	public boolean isNew() {
-		return null == getId();
+		return null == this.getId();
 	}
 }

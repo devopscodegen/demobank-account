@@ -1,6 +1,11 @@
 package com.demobank.account.domain.model.fees;
 
-public enum FeesStatus {
+import org.jmolecules.ddd.annotation.ValueObject;
+
+import com.demobank.account.domain.model.common.BaseValueObject;
+
+@ValueObject
+public enum FeesStatus implements BaseValueObject{
 
     SUCCESS {
         public boolean isSuccess() {

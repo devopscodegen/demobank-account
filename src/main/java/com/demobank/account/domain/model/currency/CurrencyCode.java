@@ -1,6 +1,8 @@
 package com.demobank.account.domain.model.currency;
 
-public enum CurrencyCode {
+import com.demobank.account.domain.model.common.BaseValueObject;
+
+public enum CurrencyCode implements BaseValueObject {
 
     USD {
         public boolean isUsd() {

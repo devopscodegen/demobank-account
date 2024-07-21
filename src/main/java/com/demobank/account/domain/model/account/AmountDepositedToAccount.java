@@ -2,25 +2,27 @@ package com.demobank.account.domain.model.account;
 
 import java.util.Date;
 
-import org.jmolecules.event.types.DomainEvent;
+import org.jmolecules.event.annotation.DomainEvent;
 
 import com.demobank.account.domain.model.account.transaction.Transaction;
 import com.demobank.account.domain.model.common.BaseDomainEvent;
 
-public class AmountDepositedToAccount extends BaseDomainEvent implements DomainEvent {
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@ToString
+@DomainEvent
+public class AmountDepositedToAccount extends BaseDomainEvent {
     private Transaction transaction;
-
-    public AmountDepositedToAccount() {
-        super();
-    }
-
-    public Transaction getTransaction() {
-        return this.transaction;
-    }
-
-    private void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
-    }
 
     public AmountDepositedToAccount(Transaction transaction) {
         super();

@@ -2,6 +2,7 @@ package com.demobank.account.port.adapter.controller.account;
 
 import java.math.BigInteger;
 
+import org.jmolecules.architecture.hexagonal.Adapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import com.demobank.account.port.adapter.controller.account.transaction.Transact
 
 @RestController
 @RequestMapping("/api/v1/account")
+@Adapter
 public class AccountController {
     @Autowired
     private AccountApplicationService accountApplicationService;

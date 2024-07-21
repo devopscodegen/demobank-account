@@ -1,5 +1,8 @@
 package com.demobank.account.domain.model.currency;
 
+import org.jmolecules.ddd.annotation.ValueObject;
+
+import com.demobank.account.domain.model.common.BaseValueObject;
 import com.demobank.account.domain.model.money.Money;
 
 import lombok.AllArgsConstructor;
@@ -15,7 +18,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class ConvertedAmount {
+@ValueObject
+public class ConvertedAmount implements BaseValueObject{
     private Money amount;
     private CurrencyCode toCurrencyCode;
     private CurrencyStatus currencyStatus;

@@ -1,6 +1,11 @@
 package com.demobank.account.domain.model.currency;
 
-public enum CurrencyStatus {
+import org.jmolecules.ddd.annotation.ValueObject;
+
+import com.demobank.account.domain.model.common.BaseValueObject;
+
+@ValueObject
+public enum CurrencyStatus implements BaseValueObject {
 
     SUCCESS {
         public boolean isSuccess() {

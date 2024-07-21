@@ -15,16 +15,19 @@ import jakarta.persistence.Transient;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name="transactions")
 @Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @ToString
+@org.jmolecules.ddd.annotation.Entity
 public class Transaction extends BaseEntity<TransactionId> {
 
     @EmbeddedId
@@ -62,28 +65,8 @@ public class Transaction extends BaseEntity<TransactionId> {
         this.setTransactionId(transactionId);
         this.setAccountId(accountId);
         this.setAmount(amount);
-        this.setStatus(transactionStatus);
+        this.setTransactionStatus(transactionStatus);
         this.setNewBalance(newBalance);
-    }
-
-    private void setTransactionId(TransactionId transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    private void setAccountId(AccountId accountId) {
-        this.accountId = accountId;
-    }
-
-    private void setAmount(Money amount) {
-        this.amount = amount;
-    }
-
-    private void setStatus(TransactionStatus transactionStatus) {
-        this.transactionStatus = transactionStatus;
-    }
-
-    private void setNewBalance(Money newBalance) {
-        this.newBalance = newBalance;
     }
 
     @Nullable

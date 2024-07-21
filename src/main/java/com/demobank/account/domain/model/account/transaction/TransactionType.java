@@ -1,6 +1,11 @@
 package com.demobank.account.domain.model.account.transaction;
 
-public enum TransactionType {
+import org.jmolecules.ddd.annotation.ValueObject;
+
+import com.demobank.account.domain.model.common.BaseValueObject;
+
+@ValueObject
+public enum TransactionType implements BaseValueObject{
 
     WITHDRAW {
         public boolean iswithdrawAmountFromAccount() {

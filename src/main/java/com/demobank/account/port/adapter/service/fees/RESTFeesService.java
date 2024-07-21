@@ -3,7 +3,7 @@ package com.demobank.account.port.adapter.service.fees;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
-
+import org.jmolecules.architecture.hexagonal.Adapter;
 import org.springframework.http.MediaType;
 
 import com.demobank.account.domain.model.account.transaction.TransactionType;
@@ -14,6 +14,7 @@ import com.demobank.account.domain.model.fees.TransactionFees;
 import com.demobank.account.domain.model.money.Money;
 
 @Service
+@Adapter
 public class RESTFeesService implements FeesService {
 
     private String baseUrl;
