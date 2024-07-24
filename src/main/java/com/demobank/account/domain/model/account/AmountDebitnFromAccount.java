@@ -21,10 +21,10 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @ToString
 @DomainEvent
-public class AmountWithdrawnFromAccount extends BaseDomainEvent {
+public class AmountDebitnFromAccount extends BaseDomainEvent {
     private Transaction transaction;
 
-    public AmountWithdrawnFromAccount(Transaction transaction) {
+    public AmountDebitnFromAccount(Transaction transaction) {
         super();
         this.setTransaction(transaction);
         this.setEventVersion(1);

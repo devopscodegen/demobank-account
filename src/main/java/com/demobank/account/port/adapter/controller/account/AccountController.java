@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.demobank.account.application.account.AccountApplicationService;
-import com.demobank.account.application.account.DepositAmountToAccountCommand;
+import com.demobank.account.application.account.CreditAmountToAccountCommand;
 import com.demobank.account.application.account.OpenAccountCommand;
-import com.demobank.account.application.account.WithdrawAmountFromAccountCommand;
+import com.demobank.account.application.account.DebitAmountFromAccountCommand;
 import com.demobank.account.domain.model.account.transaction.Transaction;
 import com.demobank.account.port.adapter.controller.account.transaction.TransactionRequest;
 import com.demobank.account.port.adapter.controller.account.transaction.TransactionResponse;
@@ -36,10 +36,10 @@ public class AccountController {
             "SUCCESS");
     }
 
-    @PostMapping("/{accountId}/withdraw")
-    public TransactionResponse withdrawAmountFromAccount(@PathVariable BigInteger accountId, @RequestBody TransactionRequest request) {
-        Transaction transaction = this.accountApplicationService.withdrawAmountFromAccount(
-            new WithdrawAmountFromAccountCommand(
+    @PostMapping("/{accountId}/debit")
+    public TransactionResponse debitAmountFromAccount(@PathVariable BigInteger accountId, @RequestBody TransactionRequest request) {
+        Transaction transaction = this.accountApplicationService.debitAmountFromAccount(
+            new DebitAmountFromAccountCommand(
                 accountId,
                 request.getAmount(), 
                 request.getCurrencyCode()));
@@ -52,10 +52,10 @@ public class AccountController {
         );
     }
 
-    @PostMapping("/{accountId}/deposit")
-    public TransactionResponse depositAmountToAccount(@PathVariable BigInteger accountId, @RequestBody TransactionRequest request) {
-        Transaction transaction = this.accountApplicationService.depositAmountToAccount(
-            new DepositAmountToAccountCommand(
+    @PostMapping("/{accountId}/credit")
+    public TransactionResponse creditAmountToAccount(@PathVariable BigInteger accountId, @RequestBody TransactionRequest request) {
+        Transaction transaction = this.accountApplicationService.creditAmountToAccount(
+            new CreditAmountToAccountCommand(
                 accountId,
                 request.getAmount(), 
                 request.getCurrencyCode()));

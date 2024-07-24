@@ -16,7 +16,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class DepositAmountToAccountCommand {
+public class CreditAmountToAccountCommand {
 
     private BigInteger accountId;
     private BigDecimal amount;

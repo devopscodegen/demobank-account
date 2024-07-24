@@ -56,7 +56,7 @@ public class Account extends BaseAggregateRoot<Account, AccountId> {
         this.setBalance(balance);
         registerEvent(new AccountOpened(this));
     }
-    public Transaction withdrawAmount(Money amount, Money amountConvertedToAccountBalanceCurrencyCode, Money transactionFees) {
+    public Transaction debitAmount(Money amount, Money amountConvertedToAccountBalanceCurrencyCode, Money transactionFees) {
 
         this.setBalance(this.getBalance().subtract(amountConvertedToAccountBalanceCurrencyCode).subtract(transactionFees));
 
@@ -69,11 +69,11 @@ public class Account extends BaseAggregateRoot<Account, AccountId> {
 
         this.getTransactions().add(transaction);
 
-        registerEvent(new AmountWithdrawnFromAccount(transaction));
+        registerEvent(new AmountDebitnFromAccount(transaction));
 
         return transaction;
     }
-    public Transaction depositAmount(Money amount, Money amountConvertedToAccountBalanceCurrencyCode, Money transactionFees) {
+    public Transaction creditAmount(Money amount, Money amountConvertedToAccountBalanceCurrencyCode, Money transactionFees) {
 
         this.setBalance(this.getBalance().add(amountConvertedToAccountBalanceCurrencyCode).subtract(transactionFees));
 
@@ -86,7 +86,7 @@ public class Account extends BaseAggregateRoot<Account, AccountId> {
 
         this.getTransactions().add(transaction);
 
-        registerEvent(new AmountDepositedToAccount(transaction));
+        registerEvent(new AmountCreditedToAccount(transaction));
 
         return transaction;
     }

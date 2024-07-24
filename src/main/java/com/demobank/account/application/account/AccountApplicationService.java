@@ -40,15 +40,15 @@ public class AccountApplicationService {
         return account;
     }
     @Transactional
-    public Transaction withdrawAmountFromAccount(WithdrawAmountFromAccountCommand withdrawAmountFromAccountCommand) {
+    public Transaction debitAmountFromAccount(DebitAmountFromAccountCommand debitAmountFromAccountCommand) {
 
-        Account account = this.accountRepository.findById(new AccountId(withdrawAmountFromAccountCommand.getAccountId())).get();
+        Account account = this.accountRepository.findById(new AccountId(debitAmountFromAccountCommand.getAccountId())).get();
 
         Money amount = new Money(
-            withdrawAmountFromAccountCommand.getAmount(), 
-            CurrencyCode.valueOf(withdrawAmountFromAccountCommand.getCurrencyCode())
+            debitAmountFromAccountCommand.getAmount(), 
+            CurrencyCode.valueOf(debitAmountFromAccountCommand.getCurrencyCode())
         );
-        Transaction transaction = account.withdrawAmount(
+        Transaction transaction = account.debitAmount(
             amount,
             this.currencyService.convertAmount(
                 amount,
@@ -65,14 +65,14 @@ public class AccountApplicationService {
     }
 
     @Transactional
-    public Transaction depositAmountToAccount(DepositAmountToAccountCommand depositAmountFromAccountCommand) {
-        Account account = this.accountRepository.findById(new AccountId(depositAmountFromAccountCommand.getAccountId())).get();
+    public Transaction creditAmountToAccount(CreditAmountToAccountCommand creditAmountFromAccountCommand) {
+        Account account = this.accountRepository.findById(new AccountId(creditAmountFromAccountCommand.getAccountId())).get();
 
         Money amount = new Money(
-            depositAmountFromAccountCommand.getAmount(), 
-            CurrencyCode.valueOf(depositAmountFromAccountCommand.getCurrencyCode())
+            creditAmountFromAccountCommand.getAmount(), 
+            CurrencyCode.valueOf(creditAmountFromAccountCommand.getCurrencyCode())
         );
-        Transaction transaction = account.depositAmount(
+        Transaction transaction = account.creditAmount(
             amount,
             this.currencyService.convertAmount(
                 amount,
