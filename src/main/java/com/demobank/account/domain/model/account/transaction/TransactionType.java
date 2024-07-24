@@ -7,13 +7,13 @@ import com.demobank.account.domain.model.common.BaseValueObject;
 @ValueObject
 public enum TransactionType implements BaseValueObject{
 
-    WITHDRAW {
+    DEBIT {
         public boolean isdebitAmountFromAccount() {
             return true;
         }
     },
 
-    DEPOSIT {
+    CREDIT {
         public boolean iscreditAmountToAccount() {
             return true;
         }
@@ -29,11 +29,11 @@ public enum TransactionType implements BaseValueObject{
 
     public TransactionType regress() {
         if (this.isdebitAmountFromAccount()) {
-            return WITHDRAW;
+            return DEBIT;
         } else if (this.iscreditAmountToAccount()) {
-            return DEPOSIT;
+            return CREDIT;
         }
 
-        return WITHDRAW;
+        return DEBIT;
     }
 }

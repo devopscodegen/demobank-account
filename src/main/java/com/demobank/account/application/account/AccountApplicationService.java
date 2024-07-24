@@ -55,7 +55,7 @@ public class AccountApplicationService {
                 account.getBalance().getCurrencyCode()
             ).getConvertedAmount(),
             this.feesService.calculateTransactionFees(
-                TransactionType.WITHDRAW, 
+                TransactionType.DEBIT, 
                 amount).getFees()
         );
 
@@ -79,7 +79,7 @@ public class AccountApplicationService {
                 account.getBalance().getCurrencyCode()
             ).getConvertedAmount(),
             this.feesService.calculateTransactionFees(
-                TransactionType.DEPOSIT, 
+                TransactionType.CREDIT, 
                 amount).getFees()
         );
 
