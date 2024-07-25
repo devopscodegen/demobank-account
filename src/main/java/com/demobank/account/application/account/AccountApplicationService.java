@@ -4,8 +4,6 @@ import org.jmolecules.architecture.hexagonal.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.math.BigDecimal;
-
 import com.demobank.account.domain.model.account.Account;
 import com.demobank.account.domain.model.account.AccountId;
 import com.demobank.account.domain.model.account.AccountRepository;
@@ -26,11 +24,12 @@ public class AccountApplicationService {
     @Autowired
     private AccountRepository accountRepository;
 
+    @Transactional
     public Account openAccount(OpenAccountCommand openAccountCommand) {
         Account account = new Account(
             new AccountId(openAccountCommand.getAccountId()),
             AccountType.valueOf(openAccountCommand.getAccountType()),
-            new Money(new BigDecimal(0), CurrencyCode.valueOf(openAccountCommand.getBalanceCurrencyCode()))
+            CurrencyCode.valueOf(openAccountCommand.getBalanceCurrencyCode())
         );
         
         account = this.accountRepository.save(account);

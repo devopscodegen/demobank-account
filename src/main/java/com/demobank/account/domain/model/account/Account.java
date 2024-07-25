@@ -1,5 +1,6 @@
 package com.demobank.account.domain.model.account;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import org.jmolecules.ddd.annotation.AggregateRoot;
@@ -9,6 +10,7 @@ import com.demobank.account.domain.model.account.transaction.TransactionId;
 import com.demobank.account.domain.model.account.transaction.TransactionStatus;
 import com.demobank.account.domain.model.account.transaction.TransactionType;
 import com.demobank.account.domain.model.common.BaseAggregateRoot;
+import com.demobank.account.domain.model.currency.CurrencyCode;
 import com.demobank.account.domain.model.money.Money;
 
 import jakarta.annotation.Nullable;
@@ -52,6 +54,10 @@ public class Account extends BaseAggregateRoot<Account, AccountId> {
     private Money balance;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Transaction> transactions;
+    public Account(AccountId accountId, AccountType accountType, CurrencyCode balanceCurrencyCode) {
+        this(accountId, accountType,
+            new Money(BigDecimal.ZERO, balanceCurrencyCode));
+    }
     public Account(AccountId accountId, AccountType accountType, Money balance) {
         super();
         this.setAccountId(accountId);
