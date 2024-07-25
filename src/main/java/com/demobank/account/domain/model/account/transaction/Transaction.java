@@ -45,6 +45,7 @@ public class Transaction extends BaseEntity<TransactionId> {
             column=@jakarta.persistence.Column(name="account_id"))
     })
     private AccountId accountId;
+    private TransactionType transactionType;
     @Embedded
     private Money amount;
     private TransactionStatus transactionStatus;
@@ -59,11 +60,12 @@ public class Transaction extends BaseEntity<TransactionId> {
     })
     private Money newBalance;
 
-    public Transaction(TransactionId transactionId, AccountId accountId, Money amount, TransactionStatus transactionStatus, Money newBalance) {
+    public Transaction(TransactionId transactionId, AccountId accountId, TransactionType transactionType, Money amount, TransactionStatus transactionStatus, Money newBalance) {
         super();
 
         this.setTransactionId(transactionId);
         this.setAccountId(accountId);
+        this.setTransactionType(transactionType);
         this.setAmount(amount);
         this.setTransactionStatus(transactionStatus);
         this.setNewBalance(newBalance);

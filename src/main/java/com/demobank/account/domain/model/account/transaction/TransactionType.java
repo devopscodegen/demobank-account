@@ -1,36 +1,33 @@
 package com.demobank.account.domain.model.account.transaction;
 
-import org.jmolecules.ddd.annotation.ValueObject;
-
 import com.demobank.account.domain.model.common.BaseValueObject;
 
-@ValueObject
 public enum TransactionType implements BaseValueObject{
 
     DEBIT {
-        public boolean isdebitAmountFromAccount() {
+        public boolean isDebit() {
             return true;
         }
     },
 
     CREDIT {
-        public boolean iscreditAmountToAccount() {
+        public boolean isCredit() {
             return true;
         }
     };
 
-    public boolean isdebitAmountFromAccount() {
+    public boolean isDebit() {
         return false;
     }
 
-    public boolean iscreditAmountToAccount() {
+    public boolean isCredit() {
         return false;
     }
 
     public TransactionType regress() {
-        if (this.isdebitAmountFromAccount()) {
+        if (this.isDebit()) {
             return DEBIT;
-        } else if (this.iscreditAmountToAccount()) {
+        } else if (this.isCredit()) {
             return CREDIT;
         }
 

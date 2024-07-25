@@ -14,6 +14,6 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class OpenAccountRequest {
-    private String accountId;
+    private String accountType;
     private String balanceCurrencyCode;
 }

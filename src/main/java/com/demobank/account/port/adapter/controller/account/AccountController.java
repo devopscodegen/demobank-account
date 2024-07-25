@@ -30,6 +30,7 @@ public class AccountController {
         this.accountApplicationService.openAccount(
             new OpenAccountCommand(
                 accountId,
+                request.getAccountType(),
                 request.getBalanceCurrencyCode()));
         
         return new OpenAccountResponse(

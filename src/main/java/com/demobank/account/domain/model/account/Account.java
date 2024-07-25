@@ -7,6 +7,7 @@ import org.jmolecules.ddd.annotation.AggregateRoot;
 import com.demobank.account.domain.model.account.transaction.Transaction;
 import com.demobank.account.domain.model.account.transaction.TransactionId;
 import com.demobank.account.domain.model.account.transaction.TransactionStatus;
+import com.demobank.account.domain.model.account.transaction.TransactionType;
 import com.demobank.account.domain.model.common.BaseAggregateRoot;
 import com.demobank.account.domain.model.money.Money;
 
@@ -46,13 +47,15 @@ public class Account extends BaseAggregateRoot<Account, AccountId> {
     })
     @EqualsAndHashCode.Include
     private AccountId accountId;
+    private AccountType accountType;
     @Embedded
     private Money balance;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Transaction> transactions;
-    public Account(AccountId accountId, Money balance) {
+    public Account(AccountId accountId, AccountType accountType, Money balance) {
         super();
         this.setAccountId(accountId);
+        this.setAccountType(accountType);
         this.setBalance(balance);
         registerEvent(new AccountOpened(this));
     }
@@ -63,13 +66,14 @@ public class Account extends BaseAggregateRoot<Account, AccountId> {
         Transaction transaction = new Transaction(
             new TransactionId(),
             this.getAccountId(), 
+            TransactionType.DEBIT,
             amount,
             TransactionStatus.SUCCESS,
             this.getBalance());
 
         this.getTransactions().add(transaction);
 
-        registerEvent(new AmountDebitnFromAccount(transaction));
+        registerEvent(new AmountDebitedFromAccount(transaction));
 
         return transaction;
     }
@@ -80,6 +84,7 @@ public class Account extends BaseAggregateRoot<Account, AccountId> {
         Transaction transaction = new Transaction(
             new TransactionId(),
             this.getAccountId(), 
+            TransactionType.CREDIT,
             amount,
             TransactionStatus.SUCCESS,
             this.getBalance());

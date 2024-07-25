@@ -17,5 +17,6 @@ import lombok.ToString;
 @ToString
 public class OpenAccountCommand {
     private BigInteger accountId;
+    private String accountType;
     private String balanceCurrencyCode;
 }
