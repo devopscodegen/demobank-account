@@ -1,7 +1,11 @@
-# demobank-account-java-springboot-maven
-Account Application Component of Demo Bank using below technologies
+# orgunit01-app01-account
+- Organization : example-bank
+- Organizational Unit : orgunit01
+- Application : app01
+- Architecture : backend microservice
+- Component : account
 - Programming Language : java
-- Middleware : springboot
+- Middleware : springboot, relational database, kafka
 - Dependency management : maven
 
 Add Common React Frontend Application Component for all
