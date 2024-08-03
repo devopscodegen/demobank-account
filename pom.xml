@@ -12,7 +12,7 @@
 	<artifactId>account</artifactId>
 	<version>1.0.0</version>
 	<name>account</name>
-	<description>Account backend microservice component of app01 application of orgunit01 organizational unit of example-bank organisation</description>
+	<description>Account component of app01 application of orgunit01 organizational unit of example-bank organisation</description>
 	<url>https://github.com/example-bank/orgunit01-app01-account</url>
 	<licenses>
 		<license>
