@@ -1,5 +1,5 @@
 # orgunit01-app01-account
-- Organization : example-bank
+- Organization : examplebank
 - Organizational Unit : orgunit01
 - Application : app01
 - Architecture : backend, microservice, rest api
